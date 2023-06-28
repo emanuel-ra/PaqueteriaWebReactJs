@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+  body{
+    @apply bg-gray-300
+  }
+  h1{
+    @apply text-lg font-semibold uppercase my-2
+  }
+}
+@layer components{
+  .navbar{
+    @apply w-full border-b-2
+  }
+  .navbar ul{
+    @apply w-full flex gap-2
+  }
+  .navbar ul li a {
+    @apply px-4 pb-1 pt-3 border-x-2 border-t-2 rounded-t-lg
+  }
+  .form{
+    @apply w-full flex-col 
+  }
+  .form .input{
+    @apply w-full p-2 border-b-2 border-gray-400 outline-none
+  }
+  .form button{
+    @apply w-full bg-blue-500 flex p-2 text-white my-2 rounded-md text-center items-center justify-center gap-1 hover:bg-blue-400 border-2 border-blue-700 shadow-lg
+  }
+}
