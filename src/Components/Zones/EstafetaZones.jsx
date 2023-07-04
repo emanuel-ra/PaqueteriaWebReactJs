@@ -34,12 +34,12 @@ function EstafetaZones({ zones }) {
                         <td scope="row" className="px-6 py-4 border-b">{zone.municipio}</td>
                         <td scope="row" className="px-6 py-4 border-b">{zone.estado}</td>
                         <td scope="row" className="px-6 py-4 border-b">{zone.periodisidad}</td>
-                        <td scope="row" className="px-6 py-4 border-b">{zone.forzoso}</td>
+                        <td scope="row" className="px-6 py-4 border-b">{zone.forzoso} {(zone.forzoso==='SI') && '🛑'}</td>
                         <td scope="row" className="px-6 py-4 border-b">{zone.reexpedicion}</td>
                         <td scope="row" className="px-6 py-4 border-b">{zone.entregaFinSemana}</td>
                         <td scope="row" className="px-6 py-4 border-b">{zone.horarioExtendido}</td>
                         <td>
-                            <ul>
+                            <ul key={`${zone.id}zones`}>
                                 <li>Lunes {(zone.lunes=='X') ? '✔':'❌'}</li>
                                 <li>Martes {(zone.martes=='X') ? '✔':'❌'}</li>
                                 <li>Miércoles {(zone.miercoles=='X') ? '✔':'❌'}</li>
@@ -52,7 +52,7 @@ function EstafetaZones({ zones }) {
                     </tr>
                 ))}
             </tbody>
-        </table>
+        </table>        
     </div>
   )
 }

@@ -1,7 +1,7 @@
 const URL_API = 'https://localhost:44355/api'
 export const searchEstafeta = async ({ search }) => {
     if (search === '') return null
-    if (!search.match(/^[0-9]{5}/)) return null
+    if (!search.match(/^[0-9]{4}/)) return null
 
     try {
         const response = await fetch(`${URL_API}/Estafeta/?zipcode=${search}`)

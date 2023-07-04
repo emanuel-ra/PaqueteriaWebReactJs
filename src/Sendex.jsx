@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, useCallback   } from "react"
 import { useSendex } from "./hooks/useSendex"
 import debounce from "just-debounce-it"
 import SendexZones from "./Components/Zones/SendexZones"
+import Loading from "./Components/Loading"
+import NotFound from "./Components/NotFound"
 
 function useSearch()
 {
@@ -27,8 +29,8 @@ function useSearch()
         }
         
 
-        if (search.length < 5) {
-            setError('La busqueda debe de tener almenos 5 caracteres')
+        if (search.length < 4) {
+            setError('La busqueda debe de tener almenos 4 caracteres')
             return
         }
 
@@ -86,7 +88,7 @@ const debounceGetZones = useCallback(
 
 
         <section>
-            { loading ? <p>Cargando...</p> : <SendexZones zones={zones} /> }
+            { loading ? <Loading />: <SendexZones zones={zones} /> }
         </section>
     </div>
     </>

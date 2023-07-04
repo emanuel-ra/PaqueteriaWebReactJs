@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState, useCallback   } from "react"
+import { useEffect, useRef, useState, useCallback, useId   } from "react"
 import { useEstafeta } from "./hooks/useEstafeta"
 import debounce from "just-debounce-it"
 import EstafetaZones from "./Components/Zones/EstafetaZones"
-
+import Loading from "./Components/Loading"
 
 function useSearch()
 {
@@ -26,8 +26,8 @@ function useSearch()
             return
         }
 
-        if (search.length < 5) {
-            setError('La busqueda debe de tener almenos 5 caracteres')
+        if (search.length < 4) {
+            setError('La busqueda debe de tener almenos 4 caracteres')
             return
         }
 
@@ -38,7 +38,6 @@ function useSearch()
 }
 
 function Estafeta() {
-
     const [sort, setSort] = useState(false)
 
     const { search, updateSearch, error } = useSearch()
@@ -62,7 +61,7 @@ function Estafeta() {
         updateSearch(newSearch)
         debounceGetZones(newSearch)
     }
-
+    
   return (
     <>
       <div className="py-2">            
@@ -85,7 +84,7 @@ function Estafeta() {
 
 
         <section>
-            { loading ? <p>Cargando...</p> : <EstafetaZones zones={zones} /> }
+            { loading ? <Loading />: <EstafetaZones zones={zones} /> }
         </section>
     </div>
     </>

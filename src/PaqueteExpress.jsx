@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback   } from "react"
 import { usePaqueteExpress } from "./hooks/usePaqueteExpress"
 import PaqueteExpressZones from "./Components/Zones/PaqueteExpressZones"
 import debounce from "just-debounce-it"
+import Loading from "./Components/Loading"
 
 function useSearch()
 {
@@ -27,8 +28,8 @@ function useSearch()
         }
         
 
-        if (search.length < 5) {
-            setError('La busqueda debe de tener almenos 5 caracteres')
+        if (search.length < 4) {
+            setError('La busqueda debe de tener almenos 4 caracteres')
             return
         }
 
@@ -85,7 +86,7 @@ function PaqueteExpress() {
 
 
             <section>
-                { loading ? <p>Cargando...</p> : <PaqueteExpressZones zones={zones} /> }
+                { loading ? <Loading />: <PaqueteExpressZones zones={zones} /> }
             </section>
         </div>
     </>
