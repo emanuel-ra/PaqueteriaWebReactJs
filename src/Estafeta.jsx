@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, useCallback   } from "react"
-import { useSendex } from "./hooks/useSendex"
+import { useEstafeta } from "./hooks/useEstafeta"
 import debounce from "just-debounce-it"
-import SendexZones from "./Components/Zones/SendexZones"
+import EstafetaZones from "./Components/Zones/EstafetaZones"
+
 
 function useSearch()
 {
@@ -11,8 +12,8 @@ function useSearch()
 
     useEffect(() => {
         if (isFirstInput.current) {
-        isFirstInput.current = search === ''
-        return
+            isFirstInput.current = search === ''
+            return
         }
 
         if (search === '') {
@@ -20,12 +21,10 @@ function useSearch()
             return
         }
 
-        /**/
         if (search.match(/^[aA-zZ]/)) {
             setError('Ingrese código postal valido')
             return
         }
-        
 
         if (search.length < 5) {
             setError('La busqueda debe de tener almenos 5 caracteres')
@@ -38,36 +37,36 @@ function useSearch()
     return { search, updateSearch, error }
 }
 
-function Sendex() {
+function Estafeta() {
 
-const [sort, setSort] = useState(false)
+    const [sort, setSort] = useState(false)
 
-const { search, updateSearch, error } = useSearch()
+    const { search, updateSearch, error } = useSearch()
 
-const { zones, getZones, loading} = useSendex({ search, sort })
+    const { zones, getZones, loading} = useEstafeta({ search, sort })
 
-const debounceGetZones = useCallback(
-    debounce(search => {
-      getZones({ search })
-    }, 300)
-    , [getZones]
-  )
+    const debounceGetZones = useCallback(
+        debounce(search => {
+        getZones({ search })
+        }, 300)
+        , [getZones]
+    )
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    getZones({ search })
-  }
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        getZones({ search })
+    }
 
-  const handleChange = (event) => {
-    const newSearch = event.target.value
-    updateSearch(newSearch)
-    debounceGetZones(newSearch)
-  }
-      
+    const handleChange = (event) => {
+        const newSearch = event.target.value
+        updateSearch(newSearch)
+        debounceGetZones(newSearch)
+    }
+
   return (
     <>
       <div className="py-2">            
-        <h1>SENDEX</h1>
+        <h1>Estafeta</h1>
 
         <form className="form" onSubmit={handleSubmit}>               
             <div className="pb-4 bg-white dark:bg-gray-900">
@@ -86,11 +85,11 @@ const debounceGetZones = useCallback(
 
 
         <section>
-            { loading ? <p>Cargando...</p> : <SendexZones zones={zones} /> }
+            { loading ? <p>Cargando...</p> : <EstafetaZones zones={zones} /> }
         </section>
     </div>
     </>
   )
 }
 
-export default Sendex
+export default Estafeta

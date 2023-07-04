@@ -10,6 +10,9 @@ function Navbar() {
                 </li>
                 <li>
                     <Link to="/sendex">Sendex</Link>
+                </li>         
+                <li>
+                    <Link to="/Estafera">Estafeta</Link>
                 </li>           
             </ul>
         </nav>
